@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Mengganti nama struct dan variabelnya
+// struct dan variabelnya
 struct Langkah {
     char namaTugas[100];
     struct Langkah* prasyaratKiri;
     struct Langkah* prasyaratKanan;
 };
 
-// Mengganti nama fungsi Buat Node
+// fungsi Buat Node
 struct Langkah* buatLangkahBaru(char* nama) {
     struct Langkah* langkahBaru = (struct Langkah*)malloc(sizeof(struct Langkah));
     strcpy(langkahBaru->namaTugas, nama);
