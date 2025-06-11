@@ -33,7 +33,7 @@ struct Langkah* cariLangkah(struct Langkah* saatIni, char* nama) {
     return cariLangkah(saatIni->prasyaratKanan, nama);
 }
 
-// --- FUNGSI KUNJUNGAN DENGAN NAMA BARU ---
+// --- FUNGSI KUNJUNGAN ---
 
 // PreOrder: Menampilkan struktur dekomposisi perakitan
 void tampilkanStrukturPerakitan(struct Langkah* tugas) {
