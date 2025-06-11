@@ -73,7 +73,7 @@ int main() {
     while (1) {
         printf("\nMenu:\n");
         printf("1. Tambah Langkah Perakitan Baru\n");
-        printf("2. Tampilkan Daftar Kerja (PostOrder - Paling Logis)\n");
+        printf("2. Tampilkan Daftar Kerja (PostOrder)\n");
         printf("3. Tampilkan Struktur Perakitan (PreOrder)\n");
         printf("4. Tampilkan Urutan Alternatif (InOrder)\n");
         printf("5. Keluar\n");
