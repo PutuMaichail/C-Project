@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 
 // Struktur node AVL
 typedef struct Node {
@@ -22,6 +22,14 @@ int height(Node* n) {
 // Buat node baru
 Node* newNode(int key) {
     Node* node = (Node*)malloc(sizeof(Node));
+    
+    // --- PENANGANAN KEGAGALAN ALOKASI MEMORI ---
+    // Periksa apakah alokasi memori berhasil. Jika gagal, program berhenti.
+    if (node == NULL) {
+        perror("Gagal mengalokasikan memori untuk node baru");
+        exit(EXIT_FAILURE);
+    }
+    
     node->key = key;
     node->left = node->right = NULL;
     node->height = 1;
@@ -96,18 +104,51 @@ void inorder(Node* root) {
     }
 }
 
+// --- MANAJEMEN MEMORI ---
+// Fungsi untuk membebaskan semua memori yang dialokasikan untuk tree
+void freeTree(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+    // Hapus subtree kiri dan kanan terlebih dahulu (post-order)
+    freeTree(root->left);
+    freeTree(root->right);
+    // Baru hapus node root-nya
+    free(root);
+}
+
+
 int main() {
     Node* root = NULL;
     int n, key;
+    
     printf("Masukkan jumlah elemen: ");
-    if (scanf("%d", &n) != 1 || n <= 0) return 0;
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        printf("Input jumlah elemen tidak valid. Program berhenti.\n");
+        return 1; // Keluar dengan error jika input bukan angka atau <= 0
+    }
+    
     printf("Masukkan %d nilai (dipisah spasi):\n", n);
     for (int i = 0; i < n; i++) {
-        scanf("%d", &key);
+        // --- PEMERIKSAAN INPUT DI DALAM LOOP ---
+        // Validasi setiap angka yang dimasukkan pengguna
+        if (scanf("%d", &key) != 1) {
+            printf("\nInput ke-%d tidak valid. Hanya angka yang diperbolehkan.\n", i + 1);
+            printf("Program berhenti untuk mencegah error.\n");
+            // Jika terjadi error, pastikan memori yang sudah ada dibebaskan
+            freeTree(root);
+            return 1; // Keluar dengan kode error
+        }
         root = insert(root, key);
     }
+    
     printf("Inorder traversal AVL tree (terurut):\n");
     inorder(root);
     printf("\n");
+    
+    // --- MANAJEMEN MEMORI ---
+    // Bebaskan semua memori yang dialokasikan sebelum program berakhir
+    freeTree(root);
+    
     return 0;
 }
