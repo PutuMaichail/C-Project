@@ -59,32 +59,32 @@ typedef struct {
 // --- Prototipe Fungsi ---
 
 // -- dari team_management.c --
-Team* create_team(int id, const char* name, int seed_points);
-void add_player_to_team(Team* team, const char* player_name);
-void print_team(const Team* team);
-void free_team(Team* team);
-int compare_teams_by_seed(const void* a, const void* b);
-Team* find_team_by_name(Team** teams, int count, const char* name);
+Team* create_team(int id, const char* name, int seed_points);      // Mengalokasikan & menginisialisasi sebuah struct Team.
+void add_player_to_team(Team* team, const char* player_name);      // Menambahkan sebuah node Player ke linked list dalam struct Team.
+void print_team(const Team* team);                                  // Mencetak informasi detail sebuah tim ke konsol.
+void free_team(Team* team);                                         // Membebaskan semua memori yang dialokasikan untuk sebuah Team (termasuk pemain).
+int compare_teams_by_seed(const void* a, const void* b);            // Fungsi pembanding untuk digunakan oleh qsort dalam pengurutan tim.
+Team* find_team_by_name(Team** teams, int count, const char* name); // Mencari sebuah tim berdasarkan nama dalam sebuah array pointer.
 
 // -- dari queue_operations.c --
-Queue* create_queue();
-void enqueue(Queue* q, Team* t);
-Team* dequeue(Queue* q);
-int is_queue_empty(const Queue* q);
-void free_queue(Queue* q);
+Queue* create_queue();      // Mengalokasikan & menginisialisasi sebuah struct Queue.
+void enqueue(Queue* q, Team* t); // Menambahkan sebuah elemen ke akhir antrean (queue).
+Team* dequeue(Queue* q);    // Mengambil & menghapus sebuah elemen dari depan antrean (queue).
+int is_queue_empty(const Queue* q); // Memeriksa apakah antrean (queue) kosong.
+void free_queue(Queue* q);  // Membebaskan semua memori yang digunakan oleh antrean (queue).
 
 // -- dari stack_operations.c --
-Stack* create_stack();
-void push(Stack* s, Match* m);
-Match* pop(Stack* s);
-int is_stack_empty(const Stack* s);
-void free_stack(Stack* s);
+Stack* create_stack();      // Mengalokasikan & menginisialisasi sebuah struct Stack.
+void push(Stack* s, Match* m); // Menambahkan sebuah elemen ke puncak tumpukan (stack).
+Match* pop(Stack* s);       // Mengambil & menghapus sebuah elemen dari puncak tumpukan (stack).
+int is_stack_empty(const Stack* s); // Memeriksa apakah tumpukan (stack) kosong.
+void free_stack(Stack* s);  // Membebaskan semua memori yang digunakan oleh tumpukan (stack).
 
 // -- dari bracket_operations.c --
-Match* create_bracket(Queue* team_queue);
-void display_bracket_recursive(Match* root, int level, int is_right_side);
-void update_match_winner(Match* root, Match* match, int winner_choice, Stack* undo_stack);
-void free_bracket(Match* root);
-Match* find_match_by_id(Match* root, int id);
+Match* create_bracket(Queue* team_queue);                                 // Membangun struktur tree bracket dari antrean tim.
+void display_bracket_recursive(Match* root, int level, int is_right_side); // Menampilkan struktur tree bracket secara visual di konsol.
+void update_match_winner(Match* root, Match* match, int winner_choice, Stack* undo_stack); // Menetapkan pemenang untuk sebuah pertandingan dan menyimpannya untuk undo.
+void free_bracket(Match* root);                                         // Membebaskan semua memori yang dialokasikan untuk tree bracket.
+Match* find_match_by_id(Match* root, int id);                           // Mencari sebuah node pertandingan berdasarkan ID-nya di dalam tree.
 
 #endif // Akhir dari blok header guard TOURNAMENT_H.
