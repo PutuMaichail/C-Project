@@ -441,7 +441,7 @@ int main() {
                 }
                 
                 jumlahTim++; // Tambah counter jumlah tim
-                printf("\nTim '%s' dengan %d pemain berhasil didaftarkan!\n", timBaru->nama, jumlahPemain);
+                printf("\n    Tim '%s' dengan %d pemain berhasil didaftarkan!\n", timBaru->nama, jumlahPemain);
                 break;
             }
             case 2: { // Pilihan: Tampilkan Semua Tim
@@ -486,7 +486,7 @@ int main() {
                 if (lagaBerikutnya == NULL) {
                     printf("Semua pertandingan sudah selesai atau turnamen telah berakhir!\n");
                     if(akarTurnamen->laga.pemenang != NULL) {
-                        printf("JUARA TURNAMEN: %s \n", akarTurnamen->laga.pemenang->nama);
+                        printf("    JUARA TURNAMEN: %s \n", akarTurnamen->laga.pemenang->nama);
                     }
                     break;
                 }
