@@ -396,7 +396,7 @@ int main() {
         printf("\n===== SISTEM MANAJEMEN TURNAMEN E-SPORTS =====\n");
         printf("1. Daftarkan Tim Baru\n");
         printf("2. Tampilkan Semua Tim Terdaftar\n");
-        printf("3. Urutkan Tim (Seeding)\n");
+        printf("3. Urutkan Tim\n");
         printf("4. Buat dan Mulai Turnamen\n");
         printf("5. Tampilkan Bagan Turnamen\n");
         printf("6. Input Hasil Pertandingan\n");
