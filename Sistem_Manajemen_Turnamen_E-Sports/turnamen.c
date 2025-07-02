@@ -267,36 +267,63 @@ NodeBagan* bangunBagan(Tim tim[], int jumlahTim) {
     return akar;
 }
 
-// Fungsi untuk menampilkan bagan secara visual (rekursif)
+// ==================================================================
+//  FUNGSI TAMPILKAN BAGAN (VERSI PERBAIKAN)
+// ==================================================================
 void tampilkanBagan(NodeBagan *akar, int tingkat) {
-    if (akar == NULL) return; // Basis rekursif: jika node kosong, berhenti
+    if (akar == NULL) {
+        return;
+    }
 
-    // Tampilkan anak kanan terlebih dahulu agar urutan visualnya benar seperti bagan
+    // 1. Tampilkan cabang kanan (atas) terlebih dahulu
     tampilkanBagan(akar->kanan, tingkat + 1);
 
-    // Cetak indentasi (tab) sesuai dengan tingkat kedalaman node di pohon
-    for (int i = 0; i < tingkat; i++) printf("\t\t");
+    // 2. Tampilkan node saat ini (tengah)
+    // Jika node ini BUKAN ronde pertama, cetak garis konektor vertikal dari atas
+    if (akar->kanan != NULL) {
+        for (int i = 0; i < tingkat + 1; i++) {
+            printf("\t\t");
+        }
+        printf("    |\n");
+    }
 
-    // Cetak informasi pertandingan
-    if (akar->kiri == NULL && akar->kanan == NULL) { // Jika ini node daun (ronde pertama)
-        printf("--- %s\n", akar->laga.tim1 ? akar->laga.tim1->nama : "Menunggu");
-        for (int i = 0; i < tingkat; i++) printf("\t\t");
-        printf("   |\n");
-        for (int i = 0; i < tingkat; i++) printf("\t\t");
-        printf("--- %s\n", akar->laga.tim2 ? akar->laga.tim2->nama : "Menunggu");
-    } else { // Jika ini node di tingkat atas
-        printf("--- Pemenang\n");
+    // Cetak garis horizontal dan nama/status laga
+    for (int i = 0; i < tingkat; i++) {
+        printf("\t\t");
     }
-    
-    // Tampilkan pemenang dari laga ini jika sudah ada
-    if (akar->laga.pemenang != NULL) {
-         for (int i = 0; i < tingkat; i++) printf("\t\t");
-         printf("   |---> [%s]\n", akar->laga.pemenang->nama);
+
+    // Cek apakah ini ronde pertama (node daun)
+    if (akar->kiri == NULL && akar->kanan == NULL) {
+        printf("--- %-15s\n", akar->laga.tim1 ? akar->laga.tim1->nama : "Menunggu");
+        for (int i = 0; i < tingkat; i++) printf("\t\t");
+        if(akar->laga.pemenang != NULL){
+            printf("   |---> [%s]\n", akar->laga.pemenang->nama);
+        } else {
+            printf("   |\n");
+        }
+        for (int i = 0; i < tingkat; i++) printf("\t\t");
+        printf("--- %-15s\n", akar->laga.tim2 ? akar->laga.tim2->nama : "Menunggu");
+    } else { // Jika ini ronde selanjutnya (node induk)
+        printf("--- Pemenang");
+        if (akar->laga.pemenang != NULL) {
+            printf(" ---> [%s]\n", akar->laga.pemenang->nama);
+        } else {
+            printf("\n");
+        }
     }
-    
-    // Tampilkan anak kiri
+
+    // Jika node ini BUKAN ronde pertama, cetak garis konektor vertikal ke bawah
+    if (akar->kiri != NULL) {
+        for (int i = 0; i < tingkat + 1; i++) {
+            printf("\t\t");
+        }
+        printf("    |\n");
+    }
+
+    // 3. Tampilkan cabang kiri (bawah)
     tampilkanBagan(akar->kiri, tingkat + 1);
 }
+
 
 // Fungsi untuk mencari pertandingan berikutnya yang siap dimainkan (rekursif)
 NodeBagan* cariLagaSelanjutnya(NodeBagan* akar) {
