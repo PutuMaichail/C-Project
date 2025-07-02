@@ -208,7 +208,7 @@ void urutkanTim(Tim tim[], int n) {
             }
         }
     }
-    printf("Tim telah diurutkan berdasarkan poin kualifikasi (seeding).\n");
+    printf("Tim telah diurutkan berdasarkan poin kualifikasi.\n");
 }
 
 // Fungsi untuk mencari tim berdasarkan nama (Linear Search)
