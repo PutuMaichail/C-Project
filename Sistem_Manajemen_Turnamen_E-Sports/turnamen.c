@@ -267,9 +267,9 @@ NodeBagan* bangunBagan(Tim tim[], int jumlahTim) {
     return akar;
 }
 
-// ==================================================================
-//  FUNGSI TAMPILKAN BAGAN (VERSI PERBAIKAN)
-// ==================================================================
+// ========================
+//  FUNGSI TAMPILKAN BAGAN
+// ========================
 void tampilkanBagan(NodeBagan *akar, int tingkat) {
     if (akar == NULL) {
         return;
@@ -480,7 +480,11 @@ int main() {
                  break;
             }
             case 3: { // Pilihan: Urutkan Tim
-                urutkanTim(daftarTim, jumlahTim); // Panggil fungsi sorting
+                if (jumlahTim == 0) {
+                    printf("Tidak ada tim yang terdaftar untuk diurutkan.\n");
+                } else {
+                    urutkanTim(daftarTim, jumlahTim); // Panggil fungsi sorting
+                }
                 break;
             }
             case 4: { // Pilihan: Buat Turnamen
